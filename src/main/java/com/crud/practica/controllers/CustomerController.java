@@ -1,7 +1,7 @@
 package com.crud.practica.controllers;
 
 import com.crud.practica.models.customerModel;
-import com.crud.practica.repositories.CustomerRepository;
+import com.crud.practica.repositories.customerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +11,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/customers")
-public class CustomerController {
+public class customerController {
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private customerRepository customerRepository;
 
     @GetMapping
     public List<customerModel> getAllCustomers() {

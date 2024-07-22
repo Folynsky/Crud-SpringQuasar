@@ -1,7 +1,7 @@
 package com.crud.practica.controllers;
 
-import com.crud.practica.models.EmpleadoModel;
-import com.crud.practica.repositories.EmpleadoRepository;
+import com.crud.practica.models.empleadoModel;
+import com.crud.practica.repositories.empleadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,19 +11,19 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/empleados")
-public class EmpleadoController {
+public class empleadoController {
 
     @Autowired
-    private EmpleadoRepository empleadoRepository;
+    private empleadoRepository empleadoRepository;
 
     @GetMapping
-    public List<EmpleadoModel> getAllEmpleados() {
+    public List<empleadoModel> getAllEmpleados() {
         return empleadoRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EmpleadoModel> getEmpleadoById(@PathVariable int id) {
-        Optional<EmpleadoModel> empleado = empleadoRepository.findById(id);
+    public ResponseEntity<empleadoModel> getEmpleadoById(@PathVariable int id) {
+        Optional<empleadoModel> empleado = empleadoRepository.findById(id);
         if (empleado.isPresent()) {
             return ResponseEntity.ok(empleado.get());
         } else {
@@ -32,15 +32,15 @@ public class EmpleadoController {
     }
 
     @PostMapping
-    public EmpleadoModel createEmpleado(@RequestBody EmpleadoModel empleado) {
+    public empleadoModel createEmpleado(@RequestBody empleadoModel empleado) {
         return empleadoRepository.save(empleado);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EmpleadoModel> updateEmpleado(@PathVariable int id, @RequestBody EmpleadoModel empleadoDetails) {
-        Optional<EmpleadoModel> empleado = empleadoRepository.findById(id);
+    public ResponseEntity<empleadoModel> updateEmpleado(@PathVariable int id, @RequestBody empleadoModel empleadoDetails) {
+        Optional<empleadoModel> empleado = empleadoRepository.findById(id);
         if (empleado.isPresent()) {
-            EmpleadoModel existingEmpleado = empleado.get();
+            empleadoModel existingEmpleado = empleado.get();
             existingEmpleado.setNombre(empleadoDetails.getNombre());
             existingEmpleado.setTelefono(empleadoDetails.getTelefono());
             existingEmpleado.setEmail(empleadoDetails.getEmail());
@@ -54,7 +54,7 @@ public class EmpleadoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEmpleado(@PathVariable int id) {
-        Optional<EmpleadoModel> empleado = empleadoRepository.findById(id);
+        Optional<empleadoModel> empleado = empleadoRepository.findById(id);
         if (empleado.isPresent()) {
             empleadoRepository.delete(empleado.get());
             return ResponseEntity.noContent().build();

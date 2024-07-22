@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "empleados")
-public class EmpleadoModel {
+public class empleadoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,10 +28,10 @@ public class EmpleadoModel {
     @Column(name = "puesto", nullable = false)
     private String puesto;
 
-    public EmpleadoModel() {
+    public empleadoModel() {
     }
 
-    public EmpleadoModel(int empleadoId, String nombre, String telefono, String email, String puesto) {
+    public empleadoModel(int empleadoId, String nombre, String telefono, String email, String puesto) {
         this.empleadoId = empleadoId;
         this.nombre = nombre;
         this.telefono = telefono;
