@@ -1,106 +1,106 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+  <q-layout view="hHh lpR fFf">
+
+    <q-header elevated class="bg-primary text-white">
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
         <q-toolbar-title>
-          Quasar App
+          <q-avatar>
+            <img src="https://tse1.mm.bing.net/th/id/OIG4.EEw2kRfT4lkfBJYbiCmF?pid=ImgGn">
+          </q-avatar>
+          Bienvenido al centro de administracion de KJShop3D
         </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
+    <q-drawer show-if-above v-model="leftDrawerOpen" side="left" elevated>
+      <!-- drawer content -->
       <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
+        <q-item to="/main" clickable v-riper>
+          <q-item-section avatar>
+            <q-icon name="home" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Home</q-item-label>
+          </q-item-section>
+        </q-item>
 
-        <EssentialLink
-          v-for="link in linksList"
-          :key="link.title"
-          v-bind="link"
-        />
+        <q-item to="/users" clickable v-riper>
+          <q-item-section avatar>
+            <q-icon name="person" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>User</q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <q-item to="/categorys" clickable v-riper>
+          <q-item-section avatar>
+            <q-icon name="category" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Categorias</q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <q-item to="/products" clickable v-ripple>
+          <q-item-section avatar>
+            <q-icon name="shopping_basket" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Productos</q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <q-item to="/shippingCompanies" clickable v-ripple>
+          <q-item-section avatar>
+            <q-icon name="local_shipping" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Paqueterias</q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
-    </q-drawer>
 
+      <q-item to="/" clickable v-ripple>
+        <q-item-section avatar>
+          <q-icon name="arrow_back" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>Salir</q-item-label>
+        </q-item-section>
+      </q-item>
+    
+      
+      
+    </q-drawer>
+    <q-list></q-list>
     <q-page-container>
       <router-view />
     </q-page-container>
+
   </q-layout>
 </template>
 
-<script setup>
+<script>
 import { ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
 
-defineOptions({
-  name: 'MainLayout'
-})
+export default {
+  setup() {
+    const leftDrawerOpen = ref(false)
 
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
+    return {
+      leftDrawerOpen,
+      toggleLeftDrawer() {
+        leftDrawerOpen.value = !leftDrawerOpen.value
+      }
+    }
   },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
+  created() {
+    if (!localStorage.getItem('loggedIn')) {
+      this.$router.push('/login');
+    }
   },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
-
-const leftDrawerOpen = ref(false)
-
-function toggleLeftDrawer () {
-  leftDrawerOpen.value = !leftDrawerOpen.value
 }
 </script>

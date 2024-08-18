@@ -1,6 +1,6 @@
 const routes = [
   {
-    path: '/main',
+    path: '/login',
   component: () => import('layouts/MainLayout.vue'),
   meta: { requiresAuth: true },
   children: [
